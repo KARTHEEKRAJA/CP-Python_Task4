@@ -1,0 +1,219 @@
+
+Before discussing the Importance of optimization. Let Us discuss Optimization.
+
+What is Optimization?
+Optimization deals with selecting the best option among a number of possible choices that are feasible or don't violate constraints. Python can be used to optimize parameters in a model to best fit data, increase the profitability of a potential engineering design, or meet some other type of objects that can be described mathematically with variables and equations.
+
+Different Methods Involved in optimization in Python
+Method 1: APM Python
+
+Method 2: SciPy Optimize Minimize
+
+Method 3: GEKKO Solution
+
+Example of Optimization :
+Suppose we are given an array where each index represents a city and the value of that index represents the distance between that city and the next city. Let’s say we have two indices and we need to calculate the total distance between those two indices. In simple terms, we need to find the total sum between any two given indices.
+
+No alt text provided for this image
+The first thought that comes to mind is that a simple FOR loop will work well here. But what if there are 100,000+ cities and we are receiving 50,000+ queries per second? Do you still think a FOR loop will give us a good enough solution for our problem?
+
+Not really. And this is where optimizing our code works wonders.
+
+Code optimization, in simple terms, means reducing the number of operations to execute any task while producing the correct results.
+
+No alt text provided for this image
+
+
+We have to figure out the distance between the city with index 1 and index 3 in the above array.
+
+No alt text provided for this image
+What if the array size is 100,000 and the number of queries is 50,000?
+
+No alt text provided for this image
+This is quite a massive number. Our FOR loop will take a lot of time if the size of the array and the number of queries are further increased. Can you think of an optimized method where we can produce the correct results while using a lesser number of solutions?
+
+Here, I will talk about a potentially better solution to solve this problem by using the prefix array to calculate the distances. Let’s see how it works:
+
+No alt text provided for this image
+Can you understand what we did here? We got the same distance with just one operation! And the best thing about this method is that it will take just one operation to calculate the distance between any two indices, regardless of if the difference between the indices is 1 or 100,000. Isn’t that amazing?
+
+Methods of Optimization :
+1. Pandas.apply() – A Feature Engineering Gem
+Pandas is already a highly optimized library but most of us still do not make the best use of it. Think about the common places in a data science project where you use it.
+
+One function I can think of is Feature Engineering where we create new features using existing features. One of the most effective ways to do this is using Pandas.apply().
+
+Here, we can pass a user-defined function and apply it to every single data point of the Pandas series. It is one of the best add-ons to the Pandas library as this function helps to segregate data according to the conditions required. We can then efficiently use it for data manipulation tasks.
+
+2. Pandas.DataFrame.loc – A Brilliant Hack for Data Manipulation in Python
+This is one of my favourite hacks of the Pandas library. I feel this is a must-know method for data scientists who deal with data manipulation tasks (so almost everyone then!).
+
+Most of the time we are required to update only some values of a particular column in a dataset based upon some condition. Pandas.DataFrame.loc gives us the most optimized solution for these kinds of problems.
+
+3. Vectorize your Functions in Python
+Another way to get rid of slow loops is by vectorizing the function. This means that a newly created function will be applied on a list of inputs and will return an array of results. Vectorizing in Python can speed up your computation by at least two iterations.
+
+ 4. Multiprocessing in Python
+Multiprocessing is the ability of a system to support more than one processor at the same time.
+
+Here, we break our process into multiple tasks and all of them run independently. Even the apply function looks slow when we are working with huge datasets.
+
+
+
+Importance of Optimization explanation with examples
+1. List comprehensions
+In Python, a great syntactic construct that is computationally more efficient for creating lists than a traditional loop is list comprehensions. So if you need to, say, have a binary feature vector for a list of numbers as data points where all negative numbers will be assigned 0 and the rest will be assigned 1, instead of:
+
+>>> input_list = [1, 2, -3]
+
+>>> output_list = []
+
+>>> for x in input_list:
+
+...    if x >= 0:
+...        output_list.append(1)
+...    else:
+...        output_list.append(0)
+
+
+>>> output_list
+
+[1,1,0]
+
+
+With the help of optimization You can do the above complex code into simple code using List comprehension:
+
+>>> output_list = [1 if x >= 0 else 0 for x in input_list]
+
+>>> output_list
+
+[1,1,0]
+
+
+2. Avoid for-loops and try to add list comprehensions snippets where possible
+In fact, in the previous example, if you were creating a vector with just one initialization value, instead of using inefficient for-loops and even list comprehensions, you could do something like this to get the best optimised solution:
+
+>>> my_list2 = [0] * len(my_list1)
+
+>>> my_list2
+
+[0,0,0]
+
+
+3. Avoid unnecessary functions
+A good example of an approach that can help shave off a significant amount of the runtime complexity but requires a lot of careful thought in terms of trade-offs is function calls. While you do want the nice abstraction, extensibility, and re-usability that functions provide, you might not want to have a function for every single thing, because function calls are quite expensive in Python (if you’re interested, there are interesting observations on that in this article). So sometimes, you might want to sacrifice, for example, writing a getter and/or a setter. On the other hand, fewer functions make the code less testable. So the final decision really depends on the specifics of your application.
+
+
+4. Use built-ins where possible
+Another tip related to functions is opting for built-in functions like max(), sum(), map(), reduce(), etc. rather than carrying out those computations yourself — they are usually written in C and will run faster. Also, if you use a built-in function — it’s less code you will have to write tests for yourself. So, for example, if you wanted a set consisting of all absolute values of input_list, you could do something like this to get the best optimised solution:
+
+>>> output_set = set(map(abs, input_list))
+
+>>> output_set
+
+[1,2,3]
+If you’re working with textual data, for string concatenation, instead of += :
+
+>>> sentence_list = ['This ', 'is ', 'a ', 'sentence.']
+
+>>> sentence = ''
+
+>>> for i in sentence_list:
+...     sentence += i
+
+>>> sentence
+
+'This is a sentence.'
+
+use str.join():
+
+>>> sentence = ''.join(sentence_list)
+
+>>> sentence
+
+'This is a sentence.'
+
+With +=, Python allocates memory for each intermediate string, and only once if str.join() is used.
+
+Use operator.itemgetter for sorting. If you have a list of tuples of, for example, first and last names like this:
+
+>>> my_tuples =[('abbie', 'smith'), ('jane', 'adams'), 
+('adam', 'johnson')]
+Default sorting would have returned this:
+
+>>> sorted(my_tuples, key=operator.itemgetter(1)]
+
+[('jane', 'adams'), ('adam', 'johnson'), ('abbie', 'smith')]
+
+
+
+5. Avoid the dot
+If you have an object and you are using some of its properties, assign them to local variables first:
+
+rectangle_height = rectangle.height
+
+rectangle_width = rectangle.width
+So if later in your code you’re computing, for instance, its surface, you will do:
+
+surface = rectangle_height * rectangle_width
+
+And if later you also compute its perimeter, you will re-use the same variables:
+
+perimeter = 2 * rectangle_height + 2 * rectangle_width
+
+You can use the timeit module again to verify that it saves you the lookup time for each reference to the rectangle object and its properties.
+
+For the same reasons, using globals is often discouraged — you don’t want to be wasting time looking up, first, the global variable itself, and then each of its properties you may be referencing.
+
+This can also apply to function references. If you’re processing, for example, a sequence of data points and you’re appending each resulting item to a list, you can do the following:
+
+push_item = my_list.append
+
+and then apply that to each resulting item:
+
+push_item(item)
+
+
+
+6. Know your data structures and know how they work in your version of Python
+In addition to general properties of each typical data structure, for example, the complexity of retrieving an item from a linked list, it’s good to know how Python data structures are implemented and where you can save some CPU or memory there. For example, if you’re looking up a key in a dictionary, you don’t even need to reference dict.keys() which makes it a little slower in Python 3. You can simply do:
+
+>>> if k in dict:
+
+...    do_something(k)
+
+In Python 2, dict.keys() even used to create an extra list of the keys!
+
+
+
+7. Choose an approach wisely
+At the same time, don’t forget to take a look at the bigger picture. If you had a list of items to process and you know that a lookup in a set is O(1) vs O(n) in a list, you might be tempted to turn your list into a set:
+
+>>> my_set = set(my_list)
+
+However, if you’re only looking up one item of that list, you might actually make things worse if you turn your list into a set first. Behind the scenes, Python will iterate over your entire list and add each item to a newly-created set. The overhead of creating a set will make you lose the advantage of looking up in a set then.
+
+On the other hand, if you want to efficiently remove duplicates from a list, casting it to set can be a good option (although there are also other options for that in Python that may work better for your case).
+
+So, as I mentioned before, there are general observations but you need to examine them carefully to understand how they’ll work in your case.
+
+There is a fair amount of more advanced approaches to managing your code in order to make it more efficient and execute faster — from parallelism or concurrency to different tricks like designing smaller objects so that they fit in the cache layer of the heap memory rather than the main one. For some tasks, you may be able to use libraries that are actually designed to optimize those kinds of tasks.
+
+The above examples explain that the importance of optimization are as follows
+
+To Reduce the code complexity
+Avoiding unnecessary for-loops replace with List Comprehensions
+Using Data Structures like Sorting, String Concatenation
+Avoiding unnecessary functions
+Avoiding Dots
+Initializing Dictionary Elements
+Import Statement overhead
+Data Aggregation
+Use xrange instead of range
+Re-map Functions at runtime
+Profiling Code
+
+
+
+
+
